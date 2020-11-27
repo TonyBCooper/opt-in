@@ -1,0 +1,205 @@
+:root{
+  --OptIn_Background1: #303030;
+  --OptIn_Background2: #404040;
+  --OptIn_FormBackground: #000000;
+  --OptIn_Color1: Orange;
+  --OptIn_FontFamily: sans-serif;
+  --OptIn_ConsentButtonBackground: lightgreen;
+  --OptIn_ConsentButtonColor: black;
+  --OptIn_InfoButtonBackground: silver;
+  --OptIn_InfoButtonColor: black;
+  --OptIn_DrawBackground: rgba(0,0,0,0.9);
+  --OptIn_DrawColor: orange;
+  --OptIn_DrawTabColor: #000;
+  --OptIn_DrawTabBacground: orange;
+}
+
+.OptIn_ConsentButton {
+  display: inline-block;
+  padding: 0.5em 1em;
+  margin: 0.1em;
+  font-weight: bold;
+  color: var(--OptIn_ConsentButtonColor);
+  background: var(--OptIn_ConsentButtonBackground);
+  cursor: pointer;
+  text-align: center;
+}
+
+.OptIn_InfoButton {
+  display: inline-block;
+  padding: 0.5em 1em;
+  margin: 0.1em;
+  font-weight: bold;
+  color: var(--OptIn_InfoButtonColor);
+  background: var(--OptIn_InfoButtonBackground);
+  cursor: pointer;
+  text-align: center;
+}
+
+.OptIn_Background{
+  box-sizing: border-box;
+  background: repeating-linear-gradient(45deg, var(--OptIn_Background1), var(--OptIn_Background1) 10px, var(--OptIn_Background2) 10px, var(--OptIn_Background2) 20px);
+  position: absolute;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  color: var(--OptIn_Color1);
+  font-family: var(--OptIn_FontFamily);
+}
+
+.OptIn_MessageBlock {
+  box-sizing: border-box;
+  border: 0.1em solid var(--OptIn_Color1);
+  padding: 0.2em;
+  width: 70%;
+  margin: auto;
+  min-width: 10em;
+  max-width: 30em;
+  background: var(--OptIn_FormBackground);
+  box-shadow: 0.1em 0.1em 0.2em rgba(0,0,0,0.5);
+  position: relative;
+  top: 50%;
+  transform: translate(0, -50%);
+  overflow: auto;
+}
+
+.OptIn_MessageBlock .OptIn_ConsentButton{
+  float:right;
+}
+
+.OptIn_MessageBlock .OptIn_InfoButton{
+}
+
+.OptIn_Heading{
+  font-size: 120%;
+  font-weight: bold;
+}
+
+.OptIn_ConsentWrapper{
+  box-sizing: border-box;
+  position: fixed;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  background: rgba(0,0,0,0.8);
+  display: none;
+}
+
+.OptIn_ConsentWrapper.OptIn_Show{
+  display: unset;
+}
+
+.OptIn_ConsentForm{
+  box-sizing: border-box;
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0.5em;
+  background: var(--OptIn_FormBackground);
+  width: 100%;
+  min-width: 20em;
+  max-width: 40em;
+  padding: 1em;
+  border: 0.1em solid var(--OptIn_Color1);
+  color: var(--OptIn_Color1);
+}
+
+.OptIn_ConsentForm.OptIn_Show{
+  display: block;
+}
+
+.OptIn_CloseX{
+  float: right;
+  cursor: pointer;
+}
+
+.OptIn_ConsentForm a, .OptIn_ConsentForm a:visited{
+  color: var(--OptIn_Color1);
+}
+
+.OptIn_ButtonWrapper{
+  float: right;
+}
+
+.OptIn_ConsentForm .OptIn_ConsentButton{
+}
+
+.OptIn_ConsentForm .OptIn_InfoButton{
+  margin-right: 2em;
+}
+
+.OptIn_Draw{
+  display: table-row;
+  position: fixed;
+  bottom: 7em;
+  left: 100%;
+  transform: translate(-2em, 0);
+  height: 6em;
+  transition: 0.5s ease-out;
+  width: 100%;
+}
+.OptIn_Draw.OptIn_Show{
+  right: unset;
+  left:0;
+  transform: translate(0, 0);
+}
+.OptIn_Draw td{
+  color: var(--OptIn_DrawColor);
+  background: var(--OptIn_DrawBackground);
+}
+.OptIn_Draw td:first-child{
+  background: unset;
+}
+.OptIn_Drawtabcell{
+  overflow: hidden;
+  max-width: 2.5em;
+}
+.OptIn_Draw td:last-child{
+  width: 7em;
+}
+.OptIn_Drawtab{
+  color: var(--OptIn_DrawTabColor);
+  transform: rotate(-90deg) translate(0, -2em);
+  padding: 0.5em 1.5em;
+  border-radius: 0.9em 0.9em 0px 0px;
+  font-weight: bold;
+  background: var(--OptIn_DrawTabBacground);
+  cursor: col-resize;
+  display: table-cell;
+}
+.OptIn_Drawbody{
+  display: table-cell;
+  height: 5em;
+  min-width: 20em;
+  padding: 0.5em;
+}
+.OptIn_Drawstatement{
+}
+.OptIn_Drawcolumns{
+  margin: 0.5em 0 0 0;
+  column-count: 4;
+  column-width: 20em;
+  column-gap: 1em;
+  padding:0;
+}
+.OptIn_Drawitem{
+  list-style: none;
+  break-inside: avoid;
+}
+.OptIn_Draw .OptIn_InfoButton, 
+.OptIn_Draw .OptIn_ConsentButton
+{
+  width: 6em;
+}
+
+@media(max-width: 32pc){
+  .OptIn_Drawcolumns{
+    display: none;
+  }
+}
+
+

@@ -1,0 +1,103 @@
+<!DOCTYPE html> 
+<html lang="en-NZ">
+  <head>
+    <title>Simple Opt-In Test Page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    
+    <link rel="StyleSheet" type="text/css" href="test.css"/>
+    <script src="opt-in/opt-in.js"></script>
+    <link rel="StyleSheet" type="text/css" href="opt-in/opt-in.css"/>
+  </head>
+  <body>
+    <h1>Opt-In Test page</h1>
+    
+    <div class="type_wrapper">
+      <h2>Anonymous analytics like Matomo</h2>
+      Status: <b id="matomoStatus">Loading</b>
+    </div>
+    
+    <div class="type_wrapper">
+      <h2>Google Analytics</h2>
+      Status: <b id="gaStatus">Loading</b>
+    </div>
+    
+    <div class="type_wrapper">
+      <h2>You tube content</h2>
+      Status: <b id="youtubeStatus">Loading</b>
+      <center>
+        <iframe width="560" height="315" src="opt-in/iframe.html" optin="YouTube" optin_src="https://www.youtube.com/embed/WFCARvh6ps4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </center>
+    </div>
+    
+    <script>
+      //================================================================ Set up opt-in types
+      OptIn.readMoreUrl = 'https://privacy.org.nz/privacy-act-2020/privacy-act-2020/';
+      
+      //This type must be communicated to the reader, but can be set as active
+      var optIn_Session = new OptInType(
+        'session', 'Essential session cookies',
+        function(optIn_Session){}
+      );
+      optIn_Session.isRequired = true;
+      
+      //This type can be set as active by default as no identifying information is being transmitted to a third party
+      var optIn_Matomo = new OptInType(
+        'Matomo', 'Analytics via local Matomo',
+        function(){//--------------------------------------------------- Matomo tracking code
+          window._paq = window._paq || [];
+          var _paq = window._paq;
+          _paq.push(['trackPageView']);
+          _paq.push(['enableLinkTracking']);
+          (function() {
+            var u="//analytics.yoursite.co.nz/";
+            _paq.push(['setTrackerUrl', u+'matomo.php']);
+            _paq.push(['setSiteId', '1']);
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+          })();
+        }
+      );
+      optIn_Matomo.defaultConsent = true;
+      
+      //Google Analytics can not be active by default, the user has to opt-in as identifing information is being sent to a third party for reasons not covered by the act
+      var optin_GA = new OptInType(
+        'ga', 'Google Analytics',
+        function(){//--------------------------------------------------- Google analytics tracking code
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-SOMECODE');
+        }
+      );
+      
+      //Some third party content can not be allowed to run in the web page until the user opts in
+      var optIn_YouTube = new OptInType(
+        'YouTube', 'Allow YouTube videos to be displayed',
+        function(){
+          optIn_YouTube.unblockIFrame()
+        }
+      );
+      optIn_YouTube.onDisallowed = function(){ //Finds and disables iframes linked to youtube
+        optIn_YouTube.blockIFrame('.youtube.','opt-in/iframe.html');
+      };
+      
+      OptIn.addDraw();
+    </script>
+    
+    <script>
+      //================================================================ optionally handle update to permissions
+      var matomoStatus = document.getElementById('matomoStatus');
+      var gaStatus = document.getElementById('gaStatus');
+      var youtubeStatus = document.getElementById('youtubeStatus');
+      
+      addEventListener('OptIn_Changed', function(){
+        matomoStatus.innerHTML = (optIn_Matomo.getConsent()) ? 'active' : 'blocked';
+        gaStatus.innerHTML = (optin_GA.getConsent()) ? 'active' : 'blocked';
+        youtubeStatus.innerHTML = (optIn_YouTube.getConsent()) ? 'active' : 'blocked';
+      });
+    </script>
+  </body>
+</html>

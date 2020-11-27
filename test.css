@@ -1,0 +1,25 @@
+/* normal css */
+
+body{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.type_wrapper{
+  border: 1px solid silver;
+  margin: 1em;
+  box-shadow: 2px 2px 4px silver;
+  padding: 1em;
+}
+
+
+/* override the opt-in.css by prefixing classes with body*/
+
+body{
+  --OptIn_FormBackground: #1010D7;
+  --OptIn_Color1: silver;
+}
+
+body .OptIn_Draw{
+  bottom: unset;
+  top: 50%;
+}

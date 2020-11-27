@@ -1,0 +1,31 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Blocked Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <link rel="StyleSheet" type="text/css" href="opt-in.css"/>
+    <script src="opt-in.js"></script>
+    <style>
+      body{
+        font-size: 1vw;
+      }
+      @media(max-width: 64pc){
+        body{
+          font-size: 1pc;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="OptIn_Background">
+      <div class="OptIn_MessageBlock">
+        <div class="OptIn_Heading">This content is blocked!</div>
+        <p>To protect your privacy we have not allowed this content to be loaded from a third party.</p>
+        <div id="OptinInfoButton" class="OptIn_InfoButton" onclick="OptIn.triggerInfoFromFrame()">learn more</div>
+        <div class="OptIn_ConsentButton" onclick="OptIn.triggerConsentFromFrame()">give consent</div>
+      </div>
+    </div>
+  </body>
+</html>

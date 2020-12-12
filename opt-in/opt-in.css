@@ -193,7 +193,7 @@
 .OptIn_Draw .OptIn_InfoButton, 
 .OptIn_Draw .OptIn_ConsentButton
 {
-  width: 6em;
+  width: 7em;
 }
 
 @media(max-width: 32pc){
